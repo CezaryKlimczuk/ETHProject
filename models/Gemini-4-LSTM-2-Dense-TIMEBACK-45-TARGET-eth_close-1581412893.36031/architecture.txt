@@ -1,0 +1,26 @@
+model = Sequential()
+model.add(LSTM(128, input_shape=(X_train.shape[1:]), return_sequences=True))
+model.add(Dropout(0.2))
+model.add(BatchNormalization())  #normalizes activation outputs, same reason you want to normalize your input data.
+
+model.add(LSTM(128, return_sequences=True))
+model.add(Dropout(0.1))
+model.add(BatchNormalization())
+
+
+model.add(LSTM(128, return_sequences=True))
+model.add(Dropout(0.1))
+model.add(BatchNormalization())
+
+
+model.add(LSTM(128))
+model.add(Dropout(0.1))
+model.add(BatchNormalization())
+
+
+model.add(Dense(32, activation='relu'))
+model.add(Dropout(0.2))
+
+model.add(Dense(2, activation='softmax'))
+
+opt = tf.keras.optimizers.Adam(lr=0.001, decay=1e-6)
